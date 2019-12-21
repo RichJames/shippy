@@ -1,12 +1,10 @@
 // shippy/consignment-service/proto/consignment/consignment.proto
 syntax = "proto3";
 
-package consignment;
+package shippy.consignment;
 
 service ShippingService {
   rpc CreateConsignment(Consignment) returns (Response) {}
-
-  // Created a new method
   rpc GetConsignments(GetRequest) returns (Response) {}
 }
 
