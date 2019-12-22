@@ -5,9 +5,10 @@ import (
 	"fmt"
 
 	// Import the generated protobuf code
+	"context"
+
 	pb "github.com/RichJames/shippy/consignment-service/proto/consignment"
 	"github.com/micro/go-micro"
-	"context"
 )
 
 type repository interface {
@@ -18,7 +19,7 @@ type repository interface {
 // Repository - Dummy repository, this simulates the use of a datastore
 // of some kind.  We'll replace this with a real implementation later on.
 type Repository struct {
-	consignments	[]*pb.Consignment
+	consignments []*pb.Consignment
 }
 
 // Create a new consignment
@@ -74,7 +75,7 @@ func main() {
 	srv := micro.NewService(
 
 		// This name must match the "package" name given in your protobuf definition
-		micro.Name("shippy.consignment"),
+		micro.Name("consignment-server"),
 	)
 
 	// Init will parse the command line flags.
@@ -82,7 +83,6 @@ func main() {
 
 	// Register handler
 	pb.RegisterShippingServiceHandler(srv.Server(), &service{repo})
-
 
 	// Run the server
 	if err := srv.Run(); err != nil {
