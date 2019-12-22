@@ -1,11 +1,11 @@
-FROM golang:1.9.0 as builder
+FROM golang:1.13.0 as builder
 
 WORKDIR /go/src/github.com/RichJames/shippy/consignment-cli
 
 COPY . .
 
-RUN go get -u github.com/golang/dep/cmd/dep
-RUN dep init && dep ensure
+RUN apt-get update
+RUN apt-get install go-dep
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 
