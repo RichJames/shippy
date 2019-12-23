@@ -15,7 +15,7 @@ type Repository interface {
 }
 
 type VesselRepository struct {
-	vessels []*pb.vessel
+	vessels []*pb.Vessel
 }
 
 // FindAvailable - checks a specification against a map of vessels,
@@ -32,7 +32,7 @@ func (repo *VesselRepository) FindAvailable(spec *pb.Specification)(*pb.Vessel, 
 
 // Our grpc service handler
 type service struct {
-	repo repository
+	repo Repository
 }
 
 func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res *pb.Response) error {
