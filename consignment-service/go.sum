@@ -50,6 +50,9 @@ github.com/Microsoft/hcsshim v0.8.6/go.mod h1:Op3hHsoHPAvb6lceZHDtd9OkTew38wNoXn
 github.com/Microsoft/hcsshim v0.8.7-0.20191101173118-65519b62243c/go.mod h1:7xhjOwRV2+0HXGmM0jxaEu+ZiXJFoVZOTfL/dmqbrD8=
 github.com/OpenDNS/vegadns2client v0.0.0-20180418235048-a3fa4a771d87/go.mod h1:iGLljf5n9GjT6kc0HBvyI1nOKnGQbNB66VzSNbK5iks=
 github.com/RichJames/shippy v0.0.0-20191223161443-97cadddbcaf2 h1:FYyTk9TxWwe/EzAyf88FIKSpR5Sw4fnjZef9gusCb+Y=
+github.com/RichJames/shippy v0.0.0-20191224144141-d2c9e45ad5d2 h1:gLz6xU/iSvkEhTZpH1SAovdLE3bESGmTNsurB5BBU7M=
+github.com/RichJames/shippy/vessel-service v0.0.0-20191224144141-d2c9e45ad5d2 h1:UAKZ83xKFXH2CR2Fb8vyOGAS1pbbOvcKORA3gs1SqeY=
+github.com/RichJames/shippy/vessel-service v0.0.0-20191224144141-d2c9e45ad5d2/go.mod h1:LYe7PZKRXFors1IjqptDz5cDff/lqg+EGAdWwLAVgzo=
 github.com/RoaringBitmap/roaring v0.4.7/go.mod h1:8khRDP4HmeXns4xIj9oGrKSz7XTQiJx2zgh7AcNke4w=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/sarama v1.22.1/go.mod h1:FRzlvRpMFO/639zY1SDxUxkqH97Y0ndM5CbGj6oG3As=
