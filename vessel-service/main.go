@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	pb "github.com/RichJames/shippy/vessel-service/proto/vessel"
-	"github.com/micro/go-micro"
+	micro "github.com/micro/go-micro"
 )
 
 type Repository interface {

@@ -38,4 +38,4 @@ COPY --from=builder /app/consignment-cli/consignment-client .
 # The name of the file to execute, must match the filename we built in the go build
 # step above (this file has been copied into this container in the above COPY step)
 CMD ["./consignment-client"]
-##CMD ["bash"]
+#CMD ["bash"]
