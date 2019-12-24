@@ -30,7 +30,7 @@ func parseFile(file string) (*pb.Consignment, error) {
 
 func main() {
 	// Set up a connection to the server
-	service := micro.NewService(micro.Name("shippy.consignment.cli"))
+	service := micro.NewService(micro.Name("shippy.cli.consignment"))
 	service.Init()
 
 	client := pb.NewShippingServiceClient("consignment-server", service.Client())
@@ -49,7 +49,7 @@ func main() {
 
 	r, err := client.CreateConsignment(context.Background(), consignment)
 	if err != nil {
-		log.Fatalf("Could not greet: %v", err)
+		log.Fatalf("TEST: Could not greet: %v", err)
 	}
 	log.Printf("Created: %t", r.Created)
 
