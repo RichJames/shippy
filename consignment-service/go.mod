@@ -12,4 +12,5 @@ require (
 	golang.org/x/sys v0.0.0-20191220220014-0732a990476f // indirect
 	google.golang.org/genproto v0.0.0-20191220175831-5c49e3ecc1c1 // indirect
 	google.golang.org/grpc v1.26.0
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
