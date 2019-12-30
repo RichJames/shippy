@@ -1,15 +1,17 @@
 FROM golang:alpine as builder
 
 WORKDIR /go/src/github.com/RichJames/shippy/consignment-cli
+#WORKDIR /go/src/consignment-cli
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
-RUN mkdir -p /go/src/consignment-cli && cd /go/src/consignment-cli
-RUN mkdir -p /go/src/consignment-service/proto
+#RUN mkdir -p /go/src/consignment-cli
+#RUN cd /go/src/consignment-cli
+#RUN mkdir -p /go/src/consignment-service/proto
 
-#COPY *go ./
-COPY . .
+COPY *go ./
+#COPY . .
 
 #COPY /go/src/github.com/RichJames/consignment-service/proto /go/src/consignment-service/proto/
 
