@@ -6,19 +6,21 @@
 
 FROM golang:alpine as builder
 
-RUN apk --no-cache add git
+WORKDIR /go/src/github.com/RichJames/shippy/consignment-service
 
-# Set our workdir to our current service in the gopath
-WORKDIR /app/shippy-service-consignment
+RUN apk --no-cache add git
+RUN apk --no-cache add build-base
+RUN mkdir -p /go/src/consignment-service && cd /go/src/consignment-service
+RUN mkdir proto
 
 # Copy the current code into our workdir
-COPY . .
+COPY *go ./
+COPY proto ./proto/
 
-RUN go mod download
-
+RUN go mod init
+RUN go build ./...
 # Build the binary, with a few flags which will allow
 # us to run this binary in Alpine.
-#RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o consignment-service
 RUN CGO_ENABLED=0 GOOS=linux go build -o consignment-service -a -installsuffix cgo main.go repository.go handler.go datastore.go
 
 # Here we're using a second FROM statement, which is strange,
@@ -37,7 +39,8 @@ WORKDIR /app
 # we pull the binary from the container named `builder`, within
 # this build context.  This reaches into our previous image, finds
 # the binary we built, and pulls it into this container. Amazing!
-COPY --from=builder /app/shippy-service-consignment/consignment-service .
+#COPY --from=builder /app/shippy-service-consignment/consignment-service .
+COPY --from=builder /go/src/github.com/RichJames/shippy/consignment-service .
 
 # Run the binary as per usual! This time with a binary build in a 
 # separate container, with all of the correct dependencies and

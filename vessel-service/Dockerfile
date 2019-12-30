@@ -1,26 +1,28 @@
 # vessel-service/Dockerfile
 FROM golang:alpine as builder
 
-#WORKDIR /app/shippy-service-vessel
 WORKDIR /go/src/github.com/RichJames/shippy/vessel-service
 
-COPY . .
+RUN apk --no-cache add git
+RUN apk --no-cache add build-base
 
-RUN apk --no-cache add bash
-#RUN go mod download
-#RUN go get -u github.com/golang/dep/cmd/dep
-#RUN dep init && dep ensure
+RUN mkdir -p /go/src/vessel-service && cd /go/src/vessel-service
+RUN mkdir proto
+
+COPY *go ./
+COPY proto ./proto/
+
+RUN go mod init
+RUN go build ./...
 RUN CGO_ENABLED=0 GOOS=linux go build -o vessel-service -a -installsuffix cgo main.go repository.go handler.go datastore.go
 
 
 FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
-RUN apk --no-cache add bash
 
 RUN mkdir /app
 WORKDIR /app
 COPY --from=builder /go/src/github.com/RichJames/shippy/vessel-service .
 
 CMD ["./vessel-service"]
-#CMD ["bash"]

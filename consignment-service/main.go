@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	defaultHost = "localhost:27017"
+	//defaultHost = "localhost:27017"
+	defaultHost = "mongodb:27017"
 )
 
 
