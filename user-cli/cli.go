@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	cmd.Init()
+//	cmd.Init()
 
 	// Create new client
 	client := pb.NewUserServiceClient("user.srv", microclient.DefaultClient)
