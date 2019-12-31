@@ -7,7 +7,7 @@ import (
 
 	pb "github.com/RichJames/shippy/user-service/proto/user"
 	microclient "github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/cmd"
+//	"github.com/micro/go-micro/cmd"
 	"golang.org/x/net/context"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
@@ -50,7 +50,7 @@ func main() {
 			name := c.String("name")
 			email := c.String("email")
 			password := c.String("password")
-			company := c.String("company"0)
+			company := c.String("company")
 
 			// Call our user service
 			r, err := client.Create(context.TODO(), &pb.User{

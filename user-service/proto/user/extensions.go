@@ -1,4 +1,4 @@
-package user
+package user_srv
 
 import (
 	"github.com/jinzhu/gorm"

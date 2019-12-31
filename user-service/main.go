@@ -44,6 +44,6 @@ func main() {
 
 	// Run the server
 	if err := srv.Run(); err != nil {
-		fmt.Pringln(err)
+		fmt.Println(err)
 	}
 }
