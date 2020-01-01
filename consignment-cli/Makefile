@@ -4,6 +4,6 @@ build:
 
 run:
 #	docker run -it -e MICRO_REGISTRY=mdns consignment-cli bash
-	docker run -e MICRO_REGISTRY=mdns \
+	docker run -e MICRO_REGISTRY=mdns -it\
 		--network container-net \
-		consignment-cli
+		consignment-cli sh
