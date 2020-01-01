@@ -1,14 +1,15 @@
 FROM golang:alpine as builder
 
-WORKDIR /go/src/github.com/RichJames/shippy/user-service
+#WORKDIR /go/src/github.com/RichJames/shippy/user-service
+WORKDIR /app
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
 COPY *go ./
 
-RUN go mod init
-RUN go build ./...
+#RUN go mod init .
+#RUN go build ./...
 
 # If we don't specify the output filename with -o <filename>, go build will
 # default to naming the output file after the project's directory name, in this
