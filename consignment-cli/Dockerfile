@@ -1,13 +1,17 @@
 FROM golang:alpine as builder
 
-WORKDIR /consignment-cli
+#WORKDIR /consignment-cli
+WORKDIR /shippy/consignment-cli
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
 COPY *go ./
+WORKDIR /shippy
+COPY ../go.mod ./
 
 #RUN go mod init consignment-cli
+#RUN go build consignment-cli/cli.go -o consignment-client
 #RUN go build ./...
 
 # If we don't specify the output filename with -o <filename>, go build will
