@@ -4,8 +4,7 @@ package main
 import (
 	"log"
 	"golang.org/x/net/context"
-//	pb "github.com/RichJames/shippy/consignment-service/proto/consignment"
-	pb "proto/consignment"
+	pb "github.com/RichJames/shippy/consignment-service/proto/consignment"
 	vesselProto "github.com/RichJames/shippy/vessel-service/proto/vessel"
 	"gopkg.in/mgo.v2"
 )
