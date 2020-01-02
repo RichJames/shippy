@@ -1,15 +1,13 @@
 FROM golang:alpine as builder
 
-#WORKDIR /go/src/github.com/RichJames/shippy/user-service
-WORKDIR /user-service
+WORKDIR /app
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
 COPY *go ./
-
-RUN go mod init user-service
-#RUN go build ./...
+COPY go.* ./
+COPY proto ./proto/
 
 # If we don't specify the output filename with -o <filename>, go build will
 # default to naming the output file after the project's directory name, in this
@@ -23,12 +21,11 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
 
-#RUN mkdir /app
 WORKDIR /app
 
 # Note that the filename here, consignment-client, must match the name of the output
 # file created in the above go build step.
-COPY --from=builder /user-service/user-service .
+COPY --from=builder /app/user-service .
 
 # The name of the file to execute, must match the filename we built in the go build
 # step above (this file has been copied into this container in the above COPY step)

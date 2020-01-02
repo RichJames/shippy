@@ -6,19 +6,16 @@
 
 FROM golang:alpine as builder
 
-WORKDIR /go/src/github.com/RichJames/shippy/consignment-service
+WORKDIR /app
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
-RUN mkdir -p /go/src/consignment-service && cd /go/src/consignment-service
-RUN mkdir proto
 
 # Copy the current code into our workdir
 COPY *go ./
+COPY go.* ./
 COPY proto ./proto/
 
-RUN go mod init
-RUN go build ./...
 # Build the binary, with a few flags which will allow
 # us to run this binary in Alpine.
 RUN CGO_ENABLED=0 GOOS=linux go build -o consignment-service -a -installsuffix cgo main.go repository.go handler.go datastore.go
@@ -32,7 +29,6 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
 # Same as before, create a directory for our app.
-RUN mkdir /app
 WORKDIR /app
 
 # Here, instead of copying the binary from our host machine,
@@ -40,7 +36,7 @@ WORKDIR /app
 # this build context.  This reaches into our previous image, finds
 # the binary we built, and pulls it into this container. Amazing!
 #COPY --from=builder /app/shippy-service-consignment/consignment-service .
-COPY --from=builder /go/src/github.com/RichJames/shippy/consignment-service .
+COPY --from=builder /app/consignment-service .
 
 # Run the binary as per usual! This time with a binary build in a 
 # separate container, with all of the correct dependencies and

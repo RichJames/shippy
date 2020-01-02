@@ -1,14 +1,12 @@
 FROM golang:alpine as builder
 
-WORKDIR /user-cli
+WORKDIR /app
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
 COPY *go ./
-
-RUN go mod init user-cli
-#RUN go build ./...
+COPY go.* ./
 
 # If we don't specify the output filename with -o <filename>, go build will
 # default to naming the output file after the project's directory name, in this
@@ -22,12 +20,11 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
 
-#RUN mkdir /app
 WORKDIR /app
-##
+
 # Note that the filename here, consignment-client, must match the name of the output
 # file created in the above go build step.
-COPY --from=builder /user-cli/user-client .
+COPY --from=builder /app/user-client .
 
 ENTRYPOINT ["./user-client"]
 
