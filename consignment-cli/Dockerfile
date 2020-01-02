@@ -1,14 +1,15 @@
 FROM golang:alpine as builder
 
 #WORKDIR /consignment-cli
-WORKDIR /shippy/consignment-cli
+WORKDIR /app
 
 RUN apk --no-cache add git
 RUN apk --no-cache add build-base
 
-COPY *go ./
+COPY ./app/go.mod /shippy
+COPY *go /shippy/consignment-cli
+
 WORKDIR /shippy
-COPY ../go.mod ./
 
 #RUN go mod init consignment-cli
 #RUN go build consignment-cli/cli.go -o consignment-client
@@ -19,7 +20,7 @@ COPY ../go.mod ./
 # case "shippy".  This confused the hell out of me.  Then I ran:
 # `go help build` and learned about this.  I'd rather be explicit.  I hate 
 # unspoken conventions.
-#RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o consignment-client .
+#RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o consignment-client ./consignment-cli/.
 
 
 #FROM alpine:latest
