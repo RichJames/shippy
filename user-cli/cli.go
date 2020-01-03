@@ -7,7 +7,7 @@ import (
 
 	pb "github.com/RichJames/shippy/user-service/proto/user"
 	microclient "github.com/micro/go-micro/client"
-//	"github.com/micro/go-micro/cmd"
+	"github.com/micro/go-micro/config/cmd"
 	"golang.org/x/net/context"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-//	cmd.Init()
+	cmd.Init()
 
 	// Create new client
 	client := pb.NewUserServiceClient("user.srv", microclient.DefaultClient)
