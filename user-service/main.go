@@ -5,6 +5,7 @@ import (
 	"log"
 	pb "github.com/RichJames/shippy/user-service/proto/user"
 	"github.com/micro/go-micro"
+	_ "github.com/micro/go-plugins/registry/mdns"
 )
 
 func main() {
@@ -39,8 +40,10 @@ func main() {
 	// Init will parse the command line flags.
 	srv.Init()
 
+	publisher := micro.NewPublisher("user.created", srv.Client())
+
 	// Register handler
-	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService})
+	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService, publisher})
 
 	// Run the server
 	if err := srv.Run(); err != nil {
