@@ -1,0 +1,60 @@
+It has been a severe beat down trying to get things to work correctly with
+go modules.  I will attempt to document here what I think works and,
+hopefully, this will continue to be true going forward.
+
+1. Work outside of the GOPATH.  In my case, I am in ~/Programming/go/shippy.
+   I cloned my github project to create this shippy folder.
+   I also deleted the src/github.com/RichJames/shippy folder.  I want only
+   one project source directory on my local drive.
+2. Do NOT create go.mod and go.sum inside the shippy parent folder.
+3. Create go.mod inside each of consignment-server, consignment-cli,
+   vessel-server, user-server, user-cli folders.  This makes each of
+   those pieces a module in go mod's eyes.  To create the first go.mod
+   file, run go mod init github.com/RichJames/shippy/<foldername>.
+4. Then run go build in each folder.  This should build the service
+   in that folder and update both go.mod and go.sum.
+5. Update git with both go.mod and go.sum files and be sure these are
+   pushed to github.
+6. Tag changes after you push them to github, if you are planning to 
+   build Docker containers with what is in github.  Run git tag -v0.3.#,
+   incrementing #.  Also, be sure to push the new tag to github: 
+   git push origin v0.3.#.
+7. Look at any of the Docker containers I have created for examples of
+   how to build these components in a new installation.  It is actually
+   pretty easy.  However, for services that use protobuf, DO NOT forget
+   to copy in the proto/ folder into the container before trying to build.
+
+I think the above are the major things to be careful about when using 
+go modules and building services in docker containers using go mod.
+
+I also am using docker-compose.  This is working, but there are some 
+things to watch out for.  To launch all the services, just run
+docker-compose up.  However, some of the services may fail to launch
+because of the order the services start.  Run docker ps to check that
+all the servers are running.  For any that are not running, just run
+docker-compose up <service-name>.
+
+I can stop all the services with docker-compose down.
+
+I can also build any given service with docker-compose build <service-name>.
+
+If I issue docker-compose up, it will also build any containers that need to
+be rebuilt before launching those services.  I can append --no-cache if I want
+to force it to rebuild from scratch rather than relying on cached build steps.
+
+As of right now, Jan 2, 2020, I have everything working correctly through 
+Tutorial 3.  That means I have correctly running mongodb, postgres,
+consignment-server, vessel-server and user-server services.  And, both the
+consignment-cli and the user-cli correctly connect and do what they do.
+Woo hoo!  It has been a solid week trying to get this all working with the 
+addition of the user client and server.
+
+I want to add that I also solved a problem in the cli.go user-client file
+where it could not find github.com/micro/go-micro/cmd.  I had to hunt through
+that repository on github and discovered that they moved the cmd code into the 
+config folder when they updated with the v1.8.0 tag. It turns out that all they
+did was move the cmd folder into the codec folder.  That meant I just changed
+the import statement to "github.com/micro/go-micro/config/cmd" and everything
+built and worked correctly.
+
+Now on to Tutorial 4!

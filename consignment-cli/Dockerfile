@@ -19,7 +19,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o consignment-clien
 FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
-RUN apk --no-cache add bash
 
 WORKDIR /app
 
@@ -28,7 +27,7 @@ COPY consignment.json /app/consignment.json
 # file created in the above go build step.
 COPY --from=builder /app/consignment-client .
 
-#ENTRYPOINT ["/consignment-client", "consignment.json"]
+ENTRYPOINT ["/app/consignment-client"]
 
 # The name of the file to execute, must match the filename we built in the go build
 # step above (this file has been copied into this container in the above COPY step)
