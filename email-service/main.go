@@ -6,7 +6,7 @@ import (
 	"log"
 
 	pb "github.com/RichJames/shippy/user-service/proto/user"
-	micro "github.com/micro/go.micro"
+	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/broker"
 	_ "github.com/micro/go-plugins/broker/nats"
 )
@@ -28,7 +28,7 @@ func main() {
 	}
 
 	// Subscribe to messages on the broker
-	_, err := pubsub.Subscribe(topic, func(p broker.Publication) error {
+	_, err := pubsub.Subscribe(topic, func(p broker.Event) error {
 		var user *pb.User
 		if err := json.Unmarshal(p.Message().Body, &user); err != nil {
 			return err
