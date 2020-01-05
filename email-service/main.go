@@ -15,7 +15,7 @@ type Subscriber struct{}
 
 func (sub *Subscriber) Process(ctx context.Context, user *pb.User) error {
 	log.Println("Picked up a new message")
-	log.Println("Sending email to: user.Name")
+	log.Println("Sending email to:", user.Name)
 	return nil
 }
 
