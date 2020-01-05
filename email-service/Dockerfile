@@ -8,9 +8,8 @@ RUN apk --no-cache add build-base
 
 COPY *go ./
 COPY go.* ./
-COPY proto ./proto/
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o vessel-service -a -installsuffix cgo main.go repository.go handler.go datastore.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o email-service -a -installsuffix cgo .
 
 
 FROM alpine:latest
@@ -18,6 +17,6 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
 WORKDIR /app
-COPY --from=builder /app/vessel-service .
+COPY --from=builder /app/email-service .
 
-CMD ["./vessel-service"]
+CMD ["./email-service"]
