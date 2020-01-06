@@ -57,4 +57,22 @@ did was move the cmd folder into the codec folder.  That meant I just changed
 the import statement to "github.com/micro/go-micro/config/cmd" and everything
 built and worked correctly.
 
-Now on to Tutorial 4!
+Things I've learned about in this series:
+
+- golang syntax and usage
+- go modules
+- microservices using grpg and go-micro
+- docker image construction and usage
+- docker networking
+- docker-compose
+- setting up microservices as events (pub/sub)
+- authenticating services
+- json vs. 
+- read and write to mongodb and postgres
+- HTTP 2 binary messages
+- 
+
+Things still to do:
+- Google Cloud
+- Kubernetes
+- web interfaces
