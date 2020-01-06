@@ -2,6 +2,16 @@
 version: '3.1'
 
 services:
+        micro-api-service:
+                image: microhq/micro
+                ports:
+                        - 8080:8080
+                environment:
+                        MICRO_ADDRESS: ":8080"
+                        MICRO_REGISTRY: "mdns"
+                        MICRO_NAMESPACE: "shippy"
+                        MICRO_API_HANDLER: "rpc"
+
         nats-service:
                 image: nats
                 ports:

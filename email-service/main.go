@@ -21,7 +21,7 @@ func (sub *Subscriber) Process(ctx context.Context, user *pb.User) error {
 
 func main() {
 	srv := micro.NewService(
-		micro.Name("shippy.email.srv"),
+		micro.Name("shippy.emailservice"),
 		micro.Version("latest"),
 	)
 
