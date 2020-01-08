@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	pb "github.com/RichJames/shippy/user-service/proto/user"
+	pb "github.com/RichJames/shippy/user-service/proto/auth"
 	"github.com/micro/go-micro"
 	_ "github.com/micro/go-plugins/registry/mdns"
 )
@@ -33,8 +33,7 @@ func main() {
 	srv := micro.NewService(
 
 		// This name maybe should match the package name given in the protobuf definition
-		micro.Name("shippy.userservice"),
-		micro.Version("latest"),
+		micro.Name("shippy.auth"),
 	)
 
 	// Init will parse the command line flags.
@@ -44,7 +43,7 @@ func main() {
 
 
 	// Register handler
-	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService})
+	pb.RegisterAuthHandler(srv.Server(), &service{repo, tokenService})
 
 	// Run the server
 	if err := srv.Run(); err != nil {

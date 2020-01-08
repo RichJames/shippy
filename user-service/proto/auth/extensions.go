@@ -1,4 +1,4 @@
-package userservice
+package auth
 
 import (
 	"github.com/jinzhu/gorm"

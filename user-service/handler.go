@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	pb "github.com/RichJames/shippy/user-service/proto/user"
+	pb "github.com/RichJames/shippy/user-service/proto/auth"
 	"golang.org/x/crypto/bcrypt"
 	"golang.org/x/net/context"
 )
@@ -59,6 +59,7 @@ func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error
 }
 
 func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) error {
+
 	log.Println("Creating user:", req)
 
 	// Generates a hashed version of our password
@@ -66,6 +67,7 @@ func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) 
 	if err != nil {
 		return errors.New(fmt.Sprintf("error hashing password: %v", err))
 	}
+
 	req.Password = string(hashedPass)
 	if err := srv.repo.Create(req); err != nil {
 		return errors.New(fmt.Sprintf("error creating user: %v", err))
