@@ -11,7 +11,7 @@ import (
 	"golang.org/x/net/context"
 
 	pb "github.com/RichJames/shippy/consignment-service/proto/consignment"
-	userService "github.com/RichJames/shippy/user-service/proto/user"
+	userService "github.com/RichJames/shippy/user-service/proto/auth"
 	vesselProto "github.com/RichJames/shippy/vessel-service/proto/vessel"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	defaultHost = "mongodb:27017"
+	defaultHost = "localhost:27017"
 )
 
 var (
@@ -53,18 +53,18 @@ func main() {
 	srv := micro.NewService(
 
 		// This name must match(??) the "package" name given in your protobuf definition
-		micro.Name("consignment-server"),
+		micro.Name("shippy.consignment"),
 		micro.Version("latest"),
 		micro.WrapHandler(AuthWrapper),
 	)
 
-	vesselClient := vesselProto.NewVesselServiceClient("vessel-service", srv.Client())
+	vesselClient := vesselProto.NewVesselServiceClient("shippy.vessel", srv.Client())
 
 	// Init will parse the command line flags.
 	srv.Init()
 
 	// Register handler
-	pb.RegisterShippingServiceHandler(srv.Server(), &service{session, vesselClient})
+	pb.RegisterConsignmentServiceHandler(srv.Server(), &service{session, vesselClient})
 
 	// Run the server
 	if err := srv.Run(); err != nil {
@@ -90,7 +90,7 @@ func AuthWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		// Really shouldn't be using a global here, find a better
 		// way of doing this, since you can't pass it into a 
 		// wrapper.
-		authClient := userService.NewUserServiceClient("user.srv", client.DefaultClient)
+		authClient := userService.NewAuthClient("shippy.auth", client.DefaultClient)
 		_, err := authClient.ValidateToken(ctx, &userService.Token{
 			Token: token,
 		})

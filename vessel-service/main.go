@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	defaultHost = "mongodb:27017"
+	defaultHost = "localhost:27017"
 )
 
 func createDummyData(repo Repository) {
@@ -44,7 +44,7 @@ func main() {
 	createDummyData(repo)
 
 	srv := micro.NewService(
-		micro.Name("vessel-service"),
+		micro.Name("shippt.vessel"),
 		micro.Version("latest"),
 	)
 

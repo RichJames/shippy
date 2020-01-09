@@ -51,8 +51,11 @@ github.com/PuerkitoBio/purell v1.0.0/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbt
 github.com/PuerkitoBio/urlesc v0.0.0-20160726150825-5bd2802263f2/go.mod h1:uGdkoq3SwY9Y+13GIhn11/XLaGBb4BfwItxLd5jeuXE=
 github.com/RichJames/shippy v0.3.1 h1:Ml9sRoDCoYZCsxfV3eoCvv8+XdoUrhQPARqnsr64N0Q=
 github.com/RichJames/shippy v0.3.8 h1:2XmHbLbxCKdZPeaM2wZ467lLMy2XozvanmdmeKU6Ak4=
+github.com/RichJames/shippy v0.5.3 h1:pSC3xJ8GJg90q/MYWGDmo8PgaeiRKbbJwvnj+bdEi3c=
 github.com/RichJames/shippy/user-service v0.0.0-20200104152534-6d07f62a2469 h1:KLV6vgE6oaZxb+Ek2NrMfLhnraAKBj2i9siIT19OeJw=
 github.com/RichJames/shippy/user-service v0.0.0-20200104152534-6d07f62a2469/go.mod h1:L4haZZzBsytngHtbnVmWvYwpikwDbJdhG2fD/r+2aDM=
+github.com/RichJames/shippy/user-service v0.0.0-20200108175938-e912ca5c3e81 h1:wOF8UctWQU9ZADyVH0wg852r3l27DpZqB6/4OWxfq2U=
+github.com/RichJames/shippy/user-service v0.0.0-20200108175938-e912ca5c3e81/go.mod h1:L4haZZzBsytngHtbnVmWvYwpikwDbJdhG2fD/r+2aDM=
 github.com/RichJames/shippy/vessel-service v0.0.0-20200102190311-cb4dc158749e h1:j/LFXJ2DVE/luVWZbZ9VFNIZT0KCgMnoBCLLQCyshSw=
 github.com/RichJames/shippy/vessel-service v0.0.0-20200102190311-cb4dc158749e/go.mod h1:yB21rCDZY6i3KweE4V56YAJpMuV5WDspAtz6AEFvV2s=
 github.com/RoaringBitmap/roaring v0.4.7/go.mod h1:8khRDP4HmeXns4xIj9oGrKSz7XTQiJx2zgh7AcNke4w=

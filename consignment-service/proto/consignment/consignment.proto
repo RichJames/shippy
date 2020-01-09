@@ -1,11 +1,11 @@
 // shippy/consignment-service/proto/consignment/consignment.proto
 syntax = "proto3";
 
-package shippy.consignment.rsj;
+package consignment;
 
-service ShippingService {
-  rpc CreateConsignment(Consignment) returns (Response) {}
-  rpc GetConsignments(GetRequest) returns (Response) {}
+service ConsignmentService {
+  rpc Create(Consignment) returns (Response) {}
+  rpc Get(GetRequest) returns (Response) {}
 }
 
 message Consignment {
@@ -29,7 +29,5 @@ message GetRequest {}
 message Response {
   bool created = 1;
   Consignment consignment = 2;
-
-  // Added a pluralised consignment to our generic reponse message
   repeated Consignment consignments = 3;
 }

@@ -25,7 +25,7 @@ func (s *service) GetRepo() Repository {
 // CreateConsignment - we created just one method on our service,
 // which is a create method, which takes a context and a request as an
 // argument, these are handled by the gRPC server.
-func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
+func (s *service) Create(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
 	defer s.GetRepo().Close()
 
 	// Here we call a client instance of our vessel service with our consignment weight.
@@ -57,7 +57,7 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 }
 
 // GetConsignments -
-func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+func (s *service) Get(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
 	defer s.GetRepo().Close()
 
 	consignments, err := s.GetRepo().GetAll()

@@ -9,7 +9,7 @@ RUN apk --no-cache add build-base
 COPY *go ./
 COPY go.* ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o email-service -a -installsuffix cgo .
+RUN CGO_ENABLED=0 GOOS=linux go build -o shippy-email-service -a -installsuffix cgo .
 
 
 FROM alpine:latest
@@ -17,6 +17,6 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 
 WORKDIR /app
-COPY --from=builder /app/email-service .
+COPY --from=builder /app/shippy-email-service .
 
-CMD ["./email-service"]
+CMD ["./shippy-email-service"]
