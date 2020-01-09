@@ -11,9 +11,10 @@ run:
 		-p 50052 \
 		-e MICRO_SERVER_ADDRESS=:50052 \
 		-e MICRO_REGISTRY=mdns \
+		-e DISABLE_AUTH=true \
 		consignment-service
 
 createcon:
 	curl -XPOST -H 'Content-Type: application/json' \
 		-d '{"description": "This is a test", "weight": "500", "containers": []}' \
-		http://localhost:8080/consignment/create
+		http://localhost:8080/consignments/create
