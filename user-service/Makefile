@@ -1,7 +1,7 @@
 build:
 	protoc -I. \
 		--go_out=plugins=micro:. \
-		proto/auth/auth.proto
+		proto/auth/auth.proto 
 
 	docker build -t shippy-user-service .
 
@@ -33,8 +33,8 @@ runold:
 
 callapi:
 	curl -XPOST -H 'Content-Type: application/json' \
-		-d '{"id":"b5652d08-b628-4158-8039-566cb7156b41"}' \
-		http://localhost:8080/auth/Get
+		-d '{"name":"Rich James", "company": "XYZ", "email": "rsj@gmail.com", "password": "testing123"}' \
+		http://localhost:8080/auth/create
 
 callrpc:
 	curl -XPOST -H 'Content-Type: application/json' \

@@ -53,7 +53,7 @@ func main() {
 	srv := micro.NewService(
 
 		// This name must match(??) the "package" name given in your protobuf definition
-		micro.Name("shippy.consignment"),
+		micro.Name("shippy.consignments"),
 		micro.Version("latest"),
 		micro.WrapHandler(AuthWrapper),
 	)
@@ -64,7 +64,7 @@ func main() {
 	srv.Init()
 
 	// Register handler
-	pb.RegisterConsignmentServiceHandler(srv.Server(), &service{session, vesselClient})
+	pb.RegisterConsignmentsHandler(srv.Server(), &service{session, vesselClient})
 
 	// Run the server
 	if err := srv.Run(); err != nil {

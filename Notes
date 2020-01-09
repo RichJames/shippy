@@ -76,3 +76,34 @@ Things still to do:
 - Google Cloud
 - Kubernetes
 - web interfaces
+
+*** micro api, rpc, etc lesson learned ***
+Using micro to respond to http requests by mapping them to microservices on the backend has been challenging.
+The documentation is not as good as it needs to be and I think, in some cases, it is just wrong (or out of date).
+In particular, calls using `http://localhost:8080/rpc` don't work no matter what I've tried.  And, the example
+code provided by the developers of micro don't even use that call form when the handler for micro api is rpc.
+They use a web URL form like this:  http://localhost:8080/auth/create.
+
+Now this is not conclusive as I am still trying to make all this work reliably.  And by that, I mean, that I
+understand it well enough to make it work as needed.
+
+One important thing I have determined is that, when running micro api, it needs to be on the same network, or 
+have network access to, the network where the microservices are running.  I've been running all the shippy 
+services on the "host" network when running things in docker.  When doing that, I also need to run micro on
+that network.  Otherwise, it will only see the http request, but not be able to route it to the microservices
+running on "host".  So, to start micro correctly, I need to issue this command:
+
+`docker run --net="host" -p 8080:8080 -e MICRO_REGISTRY=mdns microhq/micro --handler=rpc --address=:8080 --namespace=shippy`
+
+When running as above, I can call, for example, against the user service (Auth) like this to Create a user:
+
+```
+curl -XPOST -H 'Content-Type: application/json' \
+	-d '{"name": "Rich James", "company": "XYZ", "email": "rsj@gmail.com", "password": "testing123"}' \
+	http://localhost:8080/auth/create
+```
+
+What I am unclear about is how micro upper-cases my lowercase elements in that URI.  I know it maps the 
+above call to the service, shippy.auth, and calls the method, Auth.Create.  But if I've defined a method
+called, Auth.GetUser, I don't know if a call to `http://localhost:8080/auth/getuser` will correctly map
+to that method.

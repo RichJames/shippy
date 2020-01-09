@@ -44,7 +44,7 @@ func main() {
 	createDummyData(repo)
 
 	srv := micro.NewService(
-		micro.Name("shippt.vessel"),
+		micro.Name("shippy.vessel"),
 		micro.Version("latest"),
 	)
 
